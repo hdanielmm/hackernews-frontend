@@ -36,18 +36,13 @@ class App extends Component {
   }
 
   async removePost(id) {
-    // const { post } = this.state;
-    // axios({
-    //   method: "delete",
-    //   url: "http://hackernews-servidor.herokuapp.com/"+id,
-    //   responseType: "stream"
-    // })
-    //   .then(response => {
-    //     console.log("delete", response.data)
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    
+    const { posts } = this.state
+
+    this.setState({
+      posts: posts.filter((post) => (post._id !== id))
+    });
+
     try {
       const response = await PostsApi.delete("/posts/"+id);
       console.log("Deleted", response.data)
@@ -55,11 +50,7 @@ class App extends Component {
       console.log(error)
     }
 
-    // const { posts } = this.state
-
-    // this.setState({
-    //   posts: posts.filter((post, i) => (i !== index))
-    // });
+    
   }
 
   render() {
@@ -68,7 +59,7 @@ class App extends Component {
         {console.log("return",this.state.posts)}
         <Table 
           postsData={this.state.posts}
-          removePost={this.removePost} 
+          removePost={this.removePost.bind(this)} 
         />
       </div>
     );
