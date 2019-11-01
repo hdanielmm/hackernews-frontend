@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import Table from './Table';
-import axios from 'axios';
+import PostsLists from './PostsList';
+import PostsApi from './api';
+import PostsForm from './Posts/components/PostsForm';
 
-const PostsApi = axios.create({
-  baseURL: "http://hackernews-servidor.herokuapp.com",
-  timeout: 1000,
-});
 
 class App extends Component {
   state = {
@@ -48,16 +44,15 @@ class App extends Component {
       console.log("Deleted", response.data)
     } catch (error) {
       console.log(error)
-    }
-
-    
+    }   
   }
 
   render() {
     return (
       <div className="container">
         {console.log("return",this.state.posts)}
-        <Table 
+        <PostsForm />
+        <PostsLists 
           postsData={this.state.posts}
           removePost={this.removePost.bind(this)} 
         />
@@ -65,6 +60,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

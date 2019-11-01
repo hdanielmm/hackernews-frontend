@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import CreateButton from './Posts/components/CreateButton';
 
-const TableHeader = () => {
+const ListHeader = () => {
   return (
     <thead>
       <tr>
@@ -11,7 +12,7 @@ const TableHeader = () => {
     </thead>
   );
 }
-const TableBody = ({postsData, removePost}) => {
+const ListBody = ({postsData, removePost}) => {
   const rows = postsData.map((row, index) => {
     return (
       <tr key={index}>
@@ -20,6 +21,7 @@ const TableBody = ({postsData, removePost}) => {
         <td>{row.url}</td>
         <td>
           <button onClick={() => removePost(row._id)}>Delete</button>
+          <CreateButton />
         </td>
       </tr>
     );
@@ -31,15 +33,15 @@ const TableBody = ({postsData, removePost}) => {
   );
 }
 
-class Table extends Component {
+class PostsLists extends Component {
  
   
   render() {
     const { postsData, removePost } = this.props;
     return (
       <table>
-        <TableHeader />
-        <TableBody 
+        <ListHeader />
+        <ListBody 
           postsData={postsData}
           removePost={removePost}
         />
@@ -48,4 +50,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default PostsLists;
