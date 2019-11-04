@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CreateButton from './Posts/components/CreateButton';
 
 const ListHeader = () => {
   return (
@@ -12,7 +11,7 @@ const ListHeader = () => {
     </thead>
   );
 }
-const ListBody = ({postsData, removePost}) => {
+const ListBody = ({postsData, removePost, updatePost}) => {
   const rows = postsData.map((row, index) => {
     return (
       <tr key={index}>
@@ -21,7 +20,7 @@ const ListBody = ({postsData, removePost}) => {
         <td>{row.url}</td>
         <td>
           <button onClick={() => removePost(row._id)}>Delete</button>
-          <CreateButton />
+          <button onClick={() => updatePost(row._id)}>Update</button>
         </td>
       </tr>
     );
@@ -34,16 +33,18 @@ const ListBody = ({postsData, removePost}) => {
 }
 
 class PostsLists extends Component {
- 
-  
+
   render() {
-    const { postsData, removePost } = this.props;
+
+    const { postsData, removePost, updatePost } = this.props;
+
     return (
       <table>
         <ListHeader />
         <ListBody 
           postsData={postsData}
           removePost={removePost}
+          updatePost={updatePost}
         />
       </table>
     )

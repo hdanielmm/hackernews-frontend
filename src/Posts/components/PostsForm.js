@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import PostsApi from '../../api';
 
 const PostsForm = () => {
@@ -17,14 +17,14 @@ const PostsForm = () => {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     
-    const data = { title, url, Date }
+    const data = { title, url }
 
-    PostsApi.post("/posts", data);
+    await PostsApi.post("/posts", data);
     console.log("Created post successfully");
-
+    
     setTitle("");
     setUrl("");
 
